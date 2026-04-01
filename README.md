@@ -1,6 +1,4 @@
-**Language:** English | [Português (Brasil)](docs/pt-BR/README.md) | [简体中文](README.zh-CN.md) | [繁體中文](docs/zh-TW/README.md) | [日本語](docs/ja-JP/README.md) | [한국어](docs/ko-KR/README.md)
- [Türkçe](docs/tr/README.md)
-
+**Language:** English | [Português (Brasil)](docs/pt-BR/README.md) | [简体中文](README.zh-CN.md) | [繁體中文](docs/zh-TW/README.md) | [日本語](docs/ja-JP/README.md) | [한국어](docs/ko-KR/README.md) | [Türkçe](docs/tr/README.md)
 
 # Everything Claude Code
 
@@ -25,7 +23,7 @@
 
 <div align="center">
 
-**🌐 Language / 语言 / 語言 / Dil**
+**Language / 语言 / 語言 / Dil**
 
 [**English**](README.md) | [Português (Brasil)](docs/pt-BR/README.md) | [简体中文](README.zh-CN.md) | [繁體中文](docs/zh-TW/README.md) | [日本語](docs/ja-JP/README.md) | [한국어](docs/ko-KR/README.md)
  | [Türkçe](docs/tr/README.md)
@@ -153,7 +151,7 @@ See the full changelog in [Releases](https://github.com/affaan-m/everything-clau
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 Get up and running in under 2 minutes:
 
@@ -169,7 +167,7 @@ Get up and running in under 2 minutes:
 
 ### Step 2: Install Rules (Required)
 
-> ⚠️ **Important:** Claude Code plugins cannot distribute `rules` automatically. Install them manually:
+> WARNING: **Important:** Claude Code plugins cannot distribute `rules` automatically. Install them manually:
 
 ```bash
 # Clone the repo first
@@ -180,24 +178,36 @@ cd everything-claude-code
 npm install        # or: pnpm install | yarn install | bun install
 
 # macOS/Linux
+
+# Recommended: install everything (full profile)
+./install.sh --profile full
+
+# Or install for specific languages only
 ./install.sh typescript    # or python or golang or swift or php
 # ./install.sh typescript python golang swift php
 # ./install.sh --target cursor typescript
 # ./install.sh --target antigravity typescript
+# ./install.sh --target gemini --profile full
 ```
 
 ```powershell
 # Windows PowerShell
+
+# Recommended: install everything (full profile)
+.\install.ps1 --profile full
+
+# Or install for specific languages only
 .\install.ps1 typescript   # or python or golang or swift or php
 # .\install.ps1 typescript python golang swift php
 # .\install.ps1 --target cursor typescript
 # .\install.ps1 --target antigravity typescript
+# .\install.ps1 --target gemini --profile full
 
 # npm-installed compatibility entrypoint also works cross-platform
 npx ecc-install typescript
 ```
 
-For manual install instructions see the README in the `rules/` folder.
+For manual install instructions see the README in the `rules/` folder. When copying rules manually, copy the whole language directory (for example `rules/common` or `rules/golang`), not the files inside it, so relative references keep working and filenames do not collide.
 
 ### Step 3: Start Using
 
@@ -212,11 +222,25 @@ For manual install instructions see the README in the `rules/` folder.
 /plugin list everything-claude-code@everything-claude-code
 ```
 
-✨ **That's it!** You now have access to 28 agents, 119 skills, and 60 commands.
+**That's it!** You now have access to 36 agents, 142 skills, and 68 commands.
+
+### Multi-model commands require additional setup
+
+> WARNING: `multi-*` commands are **not** covered by the base plugin/rules install above.
+>
+> To use `/multi-plan`, `/multi-execute`, `/multi-backend`, `/multi-frontend`, and `/multi-workflow`, you must also install the `ccg-workflow` runtime.
+>
+> Initialize it with `npx ccg-workflow`.
+>
+> That runtime provides the external dependencies these commands expect, including:
+> - `~/.claude/bin/codeagent-wrapper`
+> - `~/.claude/.ccg/prompts/*`
+>
+> Without `ccg-workflow`, these `multi-*` commands will not run correctly.
 
 ---
 
-## 🌐 Cross-Platform Support
+## Cross-Platform Support
 
 This plugin now fully supports **Windows, macOS, and Linux**, alongside tight integration across major IDEs (Cursor, OpenCode, Antigravity) and CLI harnesses. All hooks and scripts have been rewritten in Node.js for maximum compatibility.
 
@@ -263,7 +287,7 @@ export ECC_DISABLED_HOOKS="pre:bash:tmux-reminder,post:edit:typecheck"
 
 ---
 
-## 📦 What's Inside
+## What's Inside
 
 This repo is a **Claude Code plugin** - install it directly or copy components manually.
 
@@ -273,7 +297,7 @@ everything-claude-code/
 |   |-- plugin.json         # Plugin metadata and component paths
 |   |-- marketplace.json    # Marketplace catalog for /plugin marketplace add
 |
-|-- agents/           # 28 specialized subagents for delegation
+|-- agents/           # 36 specialized subagents for delegation
 |   |-- planner.md           # Feature implementation planning
 |   |-- architect.md         # System design decisions
 |   |-- tdd-guide.md         # Test-driven development
@@ -465,7 +489,7 @@ everything-claude-code/
 
 ---
 
-## 🛠️ Ecosystem Tools
+## Ecosystem Tools
 
 ### Skill Creator
 
@@ -530,7 +554,7 @@ Use `/security-scan` in Claude Code to run it, or add to CI with the [GitHub Act
 
 [GitHub](https://github.com/affaan-m/agentshield) | [npm](https://www.npmjs.com/package/ecc-agentshield)
 
-### 🧠 Continuous Learning v2
+### Continuous Learning v2
 
 The instinct-based learning system automatically learns your patterns:
 
@@ -545,7 +569,7 @@ See `skills/continuous-learning-v2/` for full documentation.
 
 ---
 
-## 📋 Requirements
+## Requirements
 
 ### Claude Code CLI Version
 
@@ -560,7 +584,7 @@ claude --version
 
 ### Important: Hooks Auto-Loading Behavior
 
-> ⚠️ **For Contributors:** Do NOT add a `"hooks"` field to `.claude-plugin/plugin.json`. This is enforced by a regression test.
+> WARNING: **For Contributors:** Do NOT add a `"hooks"` field to `.claude-plugin/plugin.json`. This is enforced by a regression test.
 
 Claude Code v2.1+ **automatically loads** `hooks/hooks.json` from any installed plugin by convention. Explicitly declaring it in `plugin.json` causes a duplicate detection error:
 
@@ -572,7 +596,7 @@ Duplicate hooks file detected: ./hooks/hooks.json resolves to already-loaded fil
 
 ---
 
-## 📥 Installation
+## Installation
 
 ### Option 1: Install as Plugin (Recommended)
 
@@ -614,21 +638,21 @@ This gives you instant access to all commands, agents, skills, and hooks.
 >
 > # Option A: User-level rules (applies to all projects)
 > mkdir -p ~/.claude/rules
-> cp -r everything-claude-code/rules/common/* ~/.claude/rules/
-> cp -r everything-claude-code/rules/typescript/* ~/.claude/rules/   # pick your stack
-> cp -r everything-claude-code/rules/python/* ~/.claude/rules/
-> cp -r everything-claude-code/rules/golang/* ~/.claude/rules/
-> cp -r everything-claude-code/rules/php/* ~/.claude/rules/
+> cp -r everything-claude-code/rules/common ~/.claude/rules/
+> cp -r everything-claude-code/rules/typescript ~/.claude/rules/   # pick your stack
+> cp -r everything-claude-code/rules/python ~/.claude/rules/
+> cp -r everything-claude-code/rules/golang ~/.claude/rules/
+> cp -r everything-claude-code/rules/php ~/.claude/rules/
 >
 > # Option B: Project-level rules (applies to current project only)
 > mkdir -p .claude/rules
-> cp -r everything-claude-code/rules/common/* .claude/rules/
-> cp -r everything-claude-code/rules/typescript/* .claude/rules/     # pick your stack
+> cp -r everything-claude-code/rules/common .claude/rules/
+> cp -r everything-claude-code/rules/typescript .claude/rules/     # pick your stack
 > ```
 
 ---
 
-### 🔧 Option 2: Manual Installation
+### Option 2: Manual Installation
 
 If you prefer manual control over what's installed:
 
@@ -639,12 +663,13 @@ git clone https://github.com/affaan-m/everything-claude-code.git
 # Copy agents to your Claude config
 cp everything-claude-code/agents/*.md ~/.claude/agents/
 
-# Copy rules (common + language-specific)
-cp -r everything-claude-code/rules/common/* ~/.claude/rules/
-cp -r everything-claude-code/rules/typescript/* ~/.claude/rules/   # pick your stack
-cp -r everything-claude-code/rules/python/* ~/.claude/rules/
-cp -r everything-claude-code/rules/golang/* ~/.claude/rules/
-cp -r everything-claude-code/rules/php/* ~/.claude/rules/
+# Copy rules directories (common + language-specific)
+mkdir -p ~/.claude/rules
+cp -r everything-claude-code/rules/common ~/.claude/rules/
+cp -r everything-claude-code/rules/typescript ~/.claude/rules/   # pick your stack
+cp -r everything-claude-code/rules/python ~/.claude/rules/
+cp -r everything-claude-code/rules/golang ~/.claude/rules/
+cp -r everything-claude-code/rules/php ~/.claude/rules/
 
 # Copy commands
 cp everything-claude-code/commands/*.md ~/.claude/commands/
@@ -656,7 +681,7 @@ cp -r everything-claude-code/skills/search-first ~/.claude/skills/
 
 # Optional: add niche/framework-specific skills only when needed
 # for s in django-patterns django-tdd laravel-patterns springboot-patterns; do
-#   cp -r everything-claude-code/skills/$s ~/.claude/skills/
+# cp -r everything-claude-code/skills/$s ~/.claude/skills/
 # done
 ```
 
@@ -672,7 +697,7 @@ Copy desired MCP servers from `mcp-configs/mcp-servers.json` to your `~/.claude.
 
 ---
 
-## 🎯 Key Concepts
+## Key Concepts
 
 ### Agents
 
@@ -735,7 +760,7 @@ See [`rules/README.md`](rules/README.md) for installation and structure details.
 
 ---
 
-## 🗺️ Which Agent Should I Use?
+## Which Agent Should I Use?
 
 Not sure where to start? Use this quick reference:
 
@@ -781,7 +806,7 @@ Not sure where to start? Use this quick reference:
 
 ---
 
-## ❓ FAQ
+## FAQ
 
 <details>
 <summary><b>How do I check which agents/commands are installed?</b></summary>
@@ -850,7 +875,8 @@ Yes. Use Option 2 (manual installation) and copy only what you need:
 cp everything-claude-code/agents/*.md ~/.claude/agents/
 
 # Just rules
-cp -r everything-claude-code/rules/common/* ~/.claude/rules/
+mkdir -p ~/.claude/rules/
+cp -r everything-claude-code/rules/common ~/.claude/rules/
 ```
 
 Each component is fully independent.
@@ -861,6 +887,7 @@ Each component is fully independent.
 
 Yes. ECC is cross-platform:
 - **Cursor**: Pre-translated configs in `.cursor/`. See [Cursor IDE Support](#cursor-ide-support).
+- **Gemini CLI**: Experimental project-local support via `.gemini/GEMINI.md` and shared installer plumbing.
 - **OpenCode**: Full plugin support in `.opencode/`. See [OpenCode Support](#-opencode-support).
 - **Codex**: First-class support for both macOS app and CLI, with adapter drift guards and SessionStart fallback. See PR [#257](https://github.com/affaan-m/everything-claude-code/pull/257).
 - **Antigravity**: Tightly integrated setup for workflows, skills, and flattened rules in `.agent/`. See [Antigravity Guide](docs/ANTIGRAVITY-GUIDE.md).
@@ -879,7 +906,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md). The short version:
 
 ---
 
-## 🧪 Running Tests
+## Running Tests
 
 The plugin includes a comprehensive test suite:
 
@@ -895,7 +922,7 @@ node tests/hooks/hooks.test.js
 
 ---
 
-## 🤝 Contributing
+## Contributing
 
 **Contributions are welcome and encouraged.**
 
@@ -999,6 +1026,8 @@ cp .codex/config.toml ~/.codex/config.toml
 
 The sync script safely merges ECC MCP servers into your existing `~/.codex/config.toml` using an **add-only** strategy — it never removes or modifies your existing servers. Run with `--dry-run` to preview changes, or `--update-mcp` to force-refresh ECC servers to the latest recommended config.
 
+For Context7, ECC uses the canonical Codex section name `[mcp_servers.context7]` while still launching the `@upstash/context7-mcp` package. If you already have a legacy `[mcp_servers.context7-mcp]` entry, `--update-mcp` migrates it to the canonical section name.
+
 Codex macOS app:
 - Open this repository as your workspace.
 - The root `AGENTS.md` is auto-detected.
@@ -1063,7 +1092,7 @@ ECC ships three sample role configs:
 
 ---
 
-## 🔌 OpenCode Support
+## OpenCode Support
 
 ECC provides **full OpenCode support** including plugins and hooks.
 
@@ -1083,13 +1112,13 @@ The configuration is automatically detected from `.opencode/opencode.json`.
 
 | Feature | Claude Code | OpenCode | Status |
 |---------|-------------|----------|--------|
-| Agents | ✅ 28 agents | ✅ 12 agents | **Claude Code leads** |
-| Commands | ✅ 60 commands | ✅ 31 commands | **Claude Code leads** |
-| Skills | ✅ 119 skills | ✅ 37 skills | **Claude Code leads** |
-| Hooks | ✅ 8 event types | ✅ 11 events | **OpenCode has more!** |
-| Rules | ✅ 29 rules | ✅ 13 instructions | **Claude Code leads** |
-| MCP Servers | ✅ 14 servers | ✅ Full | **Full parity** |
-| Custom Tools | ✅ Via hooks | ✅ 6 native tools | **OpenCode is better** |
+| Agents | PASS: 36 agents | PASS: 12 agents | **Claude Code leads** |
+| Commands | PASS: 68 commands | PASS: 31 commands | **Claude Code leads** |
+| Skills | PASS: 142 skills | PASS: 37 skills | **Claude Code leads** |
+| Hooks | PASS: 8 event types | PASS: 11 events | **OpenCode has more!** |
+| Rules | PASS: 29 rules | PASS: 13 instructions | **Claude Code leads** |
+| MCP Servers | PASS: 14 servers | PASS: Full | **Full parity** |
+| Custom Tools | PASS: Via hooks | PASS: 6 native tools | **OpenCode is better** |
 
 ### Hook Support via Plugins
 
@@ -1214,7 +1243,7 @@ ECC is the **first plugin to maximize every major AI coding tool**. Here's how e
 
 ---
 
-## 📖 Background
+## Background
 
 I've been using Claude Code since the experimental rollout. Won the Anthropic x Forum Ventures hackathon in Sep 2025 with [@DRodriguezFX](https://x.com/DRodriguezFX) — built [zenith.chat](https://zenith.chat) entirely using Claude Code.
 
@@ -1288,7 +1317,7 @@ Agent Teams spawns multiple context windows. Each teammate consumes tokens indep
 
 ---
 
-## ⚠️ Important Notes
+## WARNING: Important Notes
 
 ### Token Optimization
 
@@ -1320,7 +1349,7 @@ These configs work for my workflow. You should:
 
 ---
 
-## 💜 Sponsors
+## Sponsors
 
 This project is free and open source. Sponsors help keep it maintained and growing.
 
@@ -1328,13 +1357,13 @@ This project is free and open source. Sponsors help keep it maintained and growi
 
 ---
 
-## 🌟 Star History
+## Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=affaan-m/everything-claude-code&type=Date)](https://star-history.com/#affaan-m/everything-claude-code&Date)
 
 ---
 
-## 🔗 Links
+## Links
 
 - **Shorthand Guide (Start Here):** [The Shorthand Guide to Everything Claude Code](https://x.com/affaanmustafa/status/2012378465664745795)
 - **Longform Guide (Advanced):** [The Longform Guide to Everything Claude Code](https://x.com/affaanmustafa/status/2014040193557471352)
@@ -1343,7 +1372,7 @@ This project is free and open source. Sponsors help keep it maintained and growi
 
 ---
 
-## 📄 License
+## License
 
 MIT - Use freely, modify as needed, contribute back if you can.
 
